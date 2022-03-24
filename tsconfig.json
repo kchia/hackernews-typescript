@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "commonjs",
+    "lib": [
+      "esnext"
+    ],
+    "strict": true, // enables a wide range of type checking behavior
+    "rootDir": ".",
+    "outDir": "dist",
+    "sourceMap": true,
+    "esModuleInterop": true
+  }
+}

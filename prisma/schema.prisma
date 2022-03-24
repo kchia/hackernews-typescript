@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// use SQLite for your database connection, along with the path to the SQLite file.
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// generate Prisma Client
+generator client {
+  provider = "prisma-client-js"
+}
+
+// define the structure of the Link database table that Prisma is going to create for you
+model Link {
+  id          Int      @id @default(autoincrement()) // primary key
+  createdAt   DateTime @default(now())
+  description String
+  url         String
+  postedBy    User?    @relation(name: "PostedBy", fields: [postedById], references: [id])
+  postedById  Int?
+  voters      User[]   @relation(name: "Votes")
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      Int?
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+  links    Link[] @relation(name: "PostedBy")
+  votes    Link[] @relation(name: "Votes")
+  Link     Link[]
+}
