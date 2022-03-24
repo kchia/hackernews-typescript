@@ -3,8 +3,8 @@
 
 // use SQLite for your database connection, along with the path to the SQLite file.
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // generate Prisma Client
